@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { Post } from './post.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { map, catchError } from 'rxjs/operators'
+import { Post } from './post.model';
 import { Subject, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root'})
 export class PostsService {
@@ -26,7 +26,14 @@ export class PostsService {
     }
 
     fetchPosts() {
-        return this.http.get<{[key: string]: Post}>('https://ng-complete-guide-7fa1f-default-rtdb.firebaseio.com/posts.json')
+        return this.http.get<{[key: string]: Post}>(
+            'https://ng-complete-guide-7fa1f-default-rtdb.firebaseio.com/posts.json',
+            { 
+                headers: new HttpHeaders({
+                    'Custon-Header': 'Hello'
+                })
+            }
+        )
         .pipe(
             map(responseData => {
             const postArray: Post[] = [];
