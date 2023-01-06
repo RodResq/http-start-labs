@@ -13,6 +13,7 @@ import { Post } from './post.model';
 export class AppComponent implements OnInit {
   loadedPosts = [];
   isFetching: boolean;
+  error = null;
 
   constructor(
     private http: HttpClient,
@@ -25,6 +26,8 @@ export class AppComponent implements OnInit {
       posts => {
         this.isFetching = false;
         this.loadedPosts = posts;
+    },error => {
+      this.error = error.message;
     });
   }
 
@@ -38,6 +41,8 @@ export class AppComponent implements OnInit {
       posts => {
         this.isFetching = false;
         this.loadedPosts = posts;
+    }, error => {
+      this.error = error.message;
     });
   }
 
