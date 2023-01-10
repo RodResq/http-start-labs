@@ -61,7 +61,7 @@ export class PostsService {
             .delete(
                 'https://ng-complete-guide-7fa1f-default-rtdb.firebaseio.com/posts.json',{ 
                 observe: 'events',
-                responseType: 'text' 
+                responseType: 'json' 
             })
             .pipe(
                 tap(
