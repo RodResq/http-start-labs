@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams, HttpParamsOptions } from '@angular/common/http';
+import { UrlTree } from '@angular/router';
 
 @Component({
   selector: 'app-core-http',
@@ -44,6 +45,16 @@ export class CoreHttpComponent implements OnInit {
 
   doDELETE() {
     console.log('DELETE');
+    let params = new HttpParams().appendAll({
+      foo: 'moo',
+      limit: 25
+    })
+    const url = `${this.apiRoot}/delete`;
+    this.http.delete(url, {
+      params: params
+    }).subscribe(res => {
+      console.log(res);
+    })
   }
 
   doGETAsPromise() {
