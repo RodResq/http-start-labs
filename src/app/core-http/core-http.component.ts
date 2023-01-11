@@ -37,10 +37,28 @@ export class CoreHttpComponent implements OnInit {
 
   doPOST() {
     console.log('POST');
+    const url = `${this.apiRoot}/post`;
+    this.http.post(url, {
+      moo: 'foo',
+      goo: 'loo',
+    }, {
+      observe: 'response'
+    }).subscribe(resp => {
+      console.log(resp);
+    })
   }
 
   doPUT() {
     console.log('PUT');
+    const url = `${this.apiRoot}/put`;
+    this.http.put(url, {
+      moo: 'foo',
+      goo: 'loo',
+    }, {
+      observe: 'response'
+    }).subscribe(resp => {
+      console.log(resp);
+    });
   }
 
   doDELETE() {
