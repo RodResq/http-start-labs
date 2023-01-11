@@ -6,9 +6,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AuthInterceptorService } from './auth-interceptor.service';
+import { CoreHttpComponent } from './core-http/core-http.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CoreHttpComponent],
   imports: [
     BrowserModule, 
     FormsModule, 
