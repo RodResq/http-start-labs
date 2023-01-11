@@ -13,19 +13,19 @@ import { CoreHttpComponent } from './core-http/core-http.component';
   imports: [
     BrowserModule, 
     FormsModule, 
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS, 
-      useClass: LoggingInterceptorService, 
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS, 
-      useClass: AuthInterceptorService, 
-      multi: true
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS, 
+    //   useClass: LoggingInterceptorService, 
+    //   multi: true
+    // },
+    // {
+    //   provide: HTTP_INTERCEPTORS, 
+    //   useClass: AuthInterceptorService, 
+    //   multi: true
+    // },
   ],
   bootstrap: [AppComponent]
 })

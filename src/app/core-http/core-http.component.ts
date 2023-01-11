@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ɵsetAllowDuplicateNgModuleIdsForTest } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpParams, HttpParamsOptions } from '@angular/common/http';
 
 @Component({
   selector: 'app-core-http',
@@ -8,15 +8,30 @@ import { Component, OnInit, ɵsetAllowDuplicateNgModuleIdsForTest } from '@angul
 })
 export class CoreHttpComponent implements OnInit {
 
-  apiRoot: string = '"http://httpbin.org';
+  apiRoot: string = 'http://httpbin.org';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
 
   doGET() {
     console.log('GET');
+    let params = new HttpParams();
+    params = params.append('sk8', 'street');
+    params = params.append('teste', 'xpto');
+    let url = `${this.apiRoot}/get`;
+    this.http.get(
+      url,
+      {
+        observe: 'body',
+        params: params,
+      },
+      ).subscribe(
+      response => {
+        console.log(response);
+      }
+    )
   }
 
   doPOST() {
