@@ -11,4 +11,10 @@
                 Search
         </button>
       </form>
+      <ul  class="list-group" *ngIf="itunes.length > 0">
+        <p>{{ itune | json}}</p>
+        <li class="list-group-item" *ngFor="let track of itunes">
+            {{ track.trackName }}
+        </li>
+      </ul>
 </div>

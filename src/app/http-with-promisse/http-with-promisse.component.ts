@@ -1,3 +1,4 @@
+import { SearchService } from './search.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,14 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./http-with-promisse.component.css']
 })
 export class HttpWithPromisseComponent implements OnInit {
+  itunes: any[] = [];
 
-  constructor() { }
+  constructor(private searchService: SearchService) { 
+  }
 
   ngOnInit(): void {
+    
   }
 
   doSearch(term: string) {
-
+    this.searchService
+      .search(term)
+      .then((resp:any) => {
+        this.itunes = resp.results;
+      }).finally();
   }
 
 }
