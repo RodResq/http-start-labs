@@ -10,7 +10,11 @@ import { CoreHttpComponent } from './core-http/core-http.component';
 import { HttpWithPromisseComponent } from './http-with-promisse/http-with-promisse.component';
 
 @NgModule({
-  declarations: [AppComponent, CoreHttpComponent, HttpWithPromisseComponent],
+  declarations: [
+    AppComponent, 
+    CoreHttpComponent, 
+    HttpWithPromisseComponent
+  ],
   imports: [
     BrowserModule, 
     FormsModule, 
