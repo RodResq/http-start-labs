@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpParams, HttpParamsOptions } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { UrlTree } from '@angular/router';
 
 @Component({
@@ -77,18 +77,46 @@ export class CoreHttpComponent implements OnInit {
 
   doGETAsPromise() {
     console.log('GET AS PROMISSE');
+    const url = `${this.apiRoot}/get`;
+    this.http.get(url)
+      .toPromise()
+      .then(res => {
+        console.log(res);
+      });
   }
 
   doGETAsPromisseError() {
     console.log('GET AS PROMISSE ERRROR');
+    const url = `${this.apiRoot}/post`;
+    this.http.get(url)
+      .toPromise()
+      .then(
+        res => console.log(res),
+        msg => console.error(`Error: ${msg.status} ${msg.statusText}`)
+      );
   }
 
   doGETAsObservableError() {
     console.log('GET AS OBSERVABLE ERROR');
+    const url = `${this.apiRoot}/post`;
+    this.http.get(url)
+      .subscribe(
+        res => console.log(res),
+        msg => console.error(`Error: {msg.status} ${msg.statusText}`)
+      );
   }
 
   doGETWithHeader() {
     console.log('GET WITH HEADERS');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', btoa('username:password'));
+    const url = `${this.apiRoot}/get`;
+    this.http.get(
+      url,
+      {headers: headers}
+    ).subscribe(
+        res => console.log(res),
+        error => console.error(`Error: ${error.msg} ${error.status}`)
+    )
   }
-
 }
