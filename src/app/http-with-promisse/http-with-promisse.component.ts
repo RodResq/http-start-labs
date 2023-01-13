@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HttpWithPromisseComponent implements OnInit {
   itunes: any[] = [];
+  loading:boolean = false;
 
   constructor(private searchService: SearchService) { 
   }
@@ -17,11 +18,14 @@ export class HttpWithPromisseComponent implements OnInit {
   }
 
   doSearch(term: string) {
+    this.loading = true;
     this.searchService
       .search(term)
       .then((resp:any) => {
         this.itunes = resp.results;
-      }).finally();
+      }).finally(() => {
+        this.loading = false;
+      });
   }
 
 }
