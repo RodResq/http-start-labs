@@ -1,10 +1,12 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { SearchItem } from './search-item.model';
 
 @Injectable({providedIn: 'root'})
 export class SearchService {
     apiRoot: string = 'https://itunes.apple.com/search';
-    results: any;
+    results: SearchItem[] = [];
     loading:boolean;
 
     constructor(private http: HttpClient) {
@@ -16,8 +18,17 @@ export class SearchService {
             this.http.get(apiURL)
                 .toPromise()
                 .then(
-                    resp => {
-                        this.results = resp
+                    (resp: {resultCount: number, results: any[]}) => {
+                        console.log(resp);
+                        this.results = resp.results.map(item => {
+                            return new SearchItem(
+                                item.trackName,
+                                item.artistName,
+                                item.trackViewUrl,
+                                item.artworkUrl30,
+                                item.artistId
+                            );
+                        });
                         resolve(this.results);
                     },
                     msg => {
