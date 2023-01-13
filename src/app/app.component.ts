@@ -23,21 +23,21 @@ export class AppComponent implements OnInit, OnDestroy {
     {}
 
   ngOnInit() {
-    this.erroSub = this.postsService.error.subscribe(
-      errorMessage => {
-        this.error = errorMessage;
-      }
-    )
+    // this.erroSub = this.postsService.error.subscribe(
+    //   errorMessage => {
+    //     this.error = errorMessage;
+    //   }
+    // )
 
-    this.isFetching = true
-    this.postsService.fetchPosts().subscribe(
-      posts => {
-        this.isFetching = false;
-        this.loadedPosts = posts;
-    },error => {
-      this.isFetching = false;
-      this.error = error.message;
-    });
+    // this.isFetching = true
+    // this.postsService.fetchPosts().subscribe(
+    //   posts => {
+    //     this.isFetching = false;
+    //     this.loadedPosts = posts;
+    // },error => {
+    //   this.isFetching = false;
+    //   this.error = error.message;
+    // });
   }
 
   onCreatePost(postData: Post) {

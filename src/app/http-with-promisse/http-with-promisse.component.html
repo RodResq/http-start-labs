@@ -21,7 +21,9 @@
           class="list-group-item" 
           *ngFor="let track of itunes">
           <img src="{{track.thumbnail}}">
+          <a href="{{track.link}}">
             {{ track.name }}
+          </a>
         </li>
       </ul>
 </div>

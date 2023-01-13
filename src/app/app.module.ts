@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { CoreHttpComponent } from './core-http/core-http.component';
 import { HttpWithPromisseComponent } from './http-with-promisse/http-with-promisse.component';
+import { HttpWithObservableComponent } from './http-with-observable/http-with-observable.component';
 
 @NgModule({
   declarations: [
     AppComponent, 
     CoreHttpComponent, 
-    HttpWithPromisseComponent
+    HttpWithPromisseComponent, 
+    HttpWithObservableComponent
   ],
   imports: [
     BrowserModule, 
