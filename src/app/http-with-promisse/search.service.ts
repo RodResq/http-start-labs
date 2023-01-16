@@ -19,7 +19,6 @@ export class SearchService {
                 .toPromise()
                 .then(
                     (resp: {resultCount: number, results: any[]}) => {
-                        console.log(resp);
                         this.results = resp.results.map(item => {
                             return new SearchItem(
                                 item.trackName,

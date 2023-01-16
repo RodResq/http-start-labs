@@ -16,7 +16,8 @@ export class SearchWithObservableService {
         params = params.append('term', term);
         params = params.append('media', 'music');
         params = params.append('limit', '20');
-        return this.http.get<SearchItem[]>(
+        return this.http
+        .get<SearchItem[]>(
             this.urlApi, { params: params }
         );
     }
