@@ -1,3 +1,4 @@
+import { debounceTime } from 'rxjs-compat/operator/debounceTime';
 import { map, tap } from 'rxjs/operators';
 import { SearchItem } from './../http-with-promisse/search-item.model';
 import { Observable } from 'rxjs';

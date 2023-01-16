@@ -12,14 +12,21 @@
             </button>
         </div>
     </form>
-    <div class="warning" *ngIf="loading">
-        Loading ...
-    </div>
+    <div class="text-center">
+        <p class="lead" *ngIf="loading">
+          Loading...
+        </p>
+      </div>
     <div class="row" *ngIf="searchItems.length > 0">
         <div class="container">
             <ul class="list-group">
-                <li class="list-group-item" *ngFor="let item of searchItems">
-                    {{ item.name }}
+                <li 
+                    class="list-group-item" 
+                    *ngFor="let item of searchItems">
+                    <img src="{{item.thumbnail}}">
+                    <a href="{{item.link}}">
+                        {{ item.name }}
+                    </a>
                 </li>
             </ul>
         </div>

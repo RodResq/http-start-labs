@@ -1,8 +1,8 @@
+import { debounceTime } from 'rxjs-compat/operator/debounceTime';
 import { Subscription, Observable } from 'rxjs';
 import { SearchItem } from './../http-with-promisse/search-item.model';
 import { SearchWithObservableService } from './search-with-obsevable.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { map } from 'rxjs-compat/operator/map';
 
 @Component({
   selector: 'app-http-with-observable',
@@ -21,9 +21,9 @@ export class HttpWithObservableComponent implements OnInit, OnDestroy {
   }
 
   doSearch(term: string) {
-    this.service.search(term)
+    this.loading = true;
+    this.sub = this.service.search(term)
       .subscribe((resp: any) => {
-        this.loading = true;
         this.searchItems = [];
         resp.results.map((item) => {
           let searchItem = new SearchItem(
