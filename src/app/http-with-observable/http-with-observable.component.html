@@ -1,1 +1,24 @@
-<p>http-with-observable works!</p>
+<div class="container">
+    <form class="form-inline">
+        <div class="form-group">
+            <input type="search" 
+                class="form-control"
+                placeholder="Enter search string"
+                #search>
+            <button 
+                class="btn btn-primary"
+                (click)=doSearch(search.value)>
+                Search
+            </button>
+        </div>
+    </form>
+    <div class="row">
+        <div class="container">
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let item of results">
+                    {{ item }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -12,22 +12,12 @@ export class SearchWithObservableService {
 
     search(term: string): Observable<any> {
         let params = new HttpParams();
+        let resultFinal: SearchItem[];
         params = params.append('term', term);
         params = params.append('media', 'music');
         params = params.append('limit', '20');
         return this.http.get(
             this.urlApi, { params: params }
-        ).pipe(
-            map((item: any) => {
-                let serachItem = new SearchItem(
-                    item.trackName,
-                    item.artistName,
-                    item.trackViewUrl,
-                    item.artworkUrl30,
-                    item.artistId
-                );
-                return serachItem;
-            })
         );
     }
 }
