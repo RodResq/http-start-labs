@@ -12,11 +12,14 @@
             </button>
         </div>
     </form>
-    <div class="row">
+    <div class="warning" *ngIf="loading">
+        Loading ...
+    </div>
+    <div class="row" *ngIf="searchItems.length > 0">
         <div class="container">
             <ul class="list-group">
-                <li class="list-group-item" *ngFor="let item of results">
-                    {{ item }}
+                <li class="list-group-item" *ngFor="let item of searchItems">
+                    {{ item.name }}
                 </li>
             </ul>
         </div>

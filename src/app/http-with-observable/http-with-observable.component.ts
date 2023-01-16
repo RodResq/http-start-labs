@@ -10,9 +10,10 @@ import { map } from 'rxjs-compat/operator/map';
   styleUrls: ['./http-with-observable.component.css']
 })
 export class HttpWithObservableComponent implements OnInit, OnDestroy {
-  private loading: boolean = false;
+  public loading: boolean = false;
   public results: Observable<any[]>;
   private sub: Subscription;
+  public searchItems: SearchItem[] = [];
 
   constructor(private service: SearchWithObservableService) { }
 
@@ -21,11 +22,22 @@ export class HttpWithObservableComponent implements OnInit, OnDestroy {
 
   doSearch(term: string) {
     this.service.search(term)
-      .subscribe((resp) => {
-        console.log(resp);
+      .subscribe((resp: any) => {
         this.loading = true;
-      }, err => console.log('An error occurs!'),
-      () => this.loading = false
+        this.searchItems = [];
+        resp.results.map((item) => {
+          let searchItem = new SearchItem(
+            item.trackName,
+            item.artistName,
+            item.artistViewUrl,
+            item.artworkUrl30,
+            item.artistId
+          );
+          this.searchItems.push(searchItem);
+        });
+        console.log(this.searchItems);
+      }, error => console.log('Alguns error ocorreu!'),
+        () => this.loading = false
       );
   }
 

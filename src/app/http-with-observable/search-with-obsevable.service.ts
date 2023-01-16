@@ -10,13 +10,12 @@ export class SearchWithObservableService {
 
     constructor(private http: HttpClient) {}
 
-    search(term: string): Observable<any> {
+    search(term: string): Observable<SearchItem[]> {
         let params = new HttpParams();
-        let resultFinal: SearchItem[];
         params = params.append('term', term);
         params = params.append('media', 'music');
         params = params.append('limit', '20');
-        return this.http.get(
+        return this.http.get<SearchItem[]>(
             this.urlApi, { params: params }
         );
     }
