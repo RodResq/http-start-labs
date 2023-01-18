@@ -7,4 +7,5 @@ export class SearchItem {
         public artistId: string) {
 
     }
+
 }
