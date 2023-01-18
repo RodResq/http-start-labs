@@ -18,7 +18,8 @@ export class SearchWithObservableService {
         params = params.append('limit', '20');
         return this.http
         .get(
-            this.urlApi, { params: params }
+            this.urlApi, 
+            { params: params }
         );
     }
 }
