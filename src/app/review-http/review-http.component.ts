@@ -15,7 +15,16 @@ export class ReviewHttpComponent implements OnInit {
   ngOnInit() {}
 
   onCreatePost(postData: { title: string; content: string }) {
-    console.log(postData);
+    this.http
+      .post(
+        'https://ng-complete-guide-7fa1f-default-rtdb.firebaseio.com/posts.json',
+        postData
+      ).subscribe(
+        postData => {
+          console.log(postData);
+          
+        }
+      );
   }
 
   onFetchPosts() {
