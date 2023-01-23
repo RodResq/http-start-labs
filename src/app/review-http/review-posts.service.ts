@@ -1,10 +1,13 @@
+import { catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject, throwError } from 'rxjs';
 import { map } from 'rxjs-compat/operators/map';
 import { Post } from '../post.model';
 
 @Injectable({ providedIn: 'root' })
 export class ReviewPostsService {
+    error = new Subject<String>();
 
     constructor(private http: HttpClient) { }
 
@@ -16,21 +19,28 @@ export class ReviewPostsService {
             post
         ).subscribe(post => {
             console.log(post);
+        }, error => {
+            this.error.next(error.message);
         });
     }
 
     fetchPost() {
         return this.http
         .get<{ [key: string]: Post }>('https://ng-complete-guide-7fa1f-default-rtdb.firebaseio.com/posts.json')
-        .pipe(map(responseData => {
+        .pipe(
+            map(responseData => {
             let postArray: Post[] = [];
             for(let key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-                postArray.push({ ...responseData[key], id: key });
-            }
+                if (responseData.hasOwnProperty(key)) {
+                    postArray.push({ ...responseData[key], id: key });
+                }
             }
             return postArray;
-        }));
+        }), 
+            catchError(errorResp => {
+                return throwError(errorResp);
+            })
+        );
     }
 
     deletePosts() {
