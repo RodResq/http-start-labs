@@ -13,6 +13,7 @@ export class ReviewHttpComponent implements OnInit {
 
   loadedPosts: Post[] = [];
   fetchingPost = false;
+  error = null;
 
   constructor(
     private http: HttpClient,
@@ -24,6 +25,8 @@ export class ReviewHttpComponent implements OnInit {
       posts => {
         this.fetchingPost = false;
         this.loadedPosts = posts;
+      }, err => {
+        this.error = err.message;
       }
     );
   }
@@ -49,6 +52,8 @@ export class ReviewHttpComponent implements OnInit {
       posts => {
         this.fetchingPost = false;
         this.loadedPosts = posts;
+      }, err => {
+        this.error = err.message;
       }
     );
   }
