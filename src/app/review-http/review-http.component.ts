@@ -38,6 +38,9 @@ export class ReviewHttpComponent implements OnInit {
   }
 
   onClearPosts() {
+    this.reviewPostService.deletePosts().subscribe(() => {
+      this.loadedPosts = [];
+    });
   }
 
   private fetchPosts() {
