@@ -1,5 +1,5 @@
 import { catchError } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, throwError } from 'rxjs';
 import { map } from 'rxjs-compat/operators/map';
@@ -26,7 +26,12 @@ export class ReviewPostsService {
 
     fetchPost() {
         return this.http
-        .get<{ [key: string]: Post }>('https://ng-complete-guide-7fa1f-default-rtdb.firebaseio.com/posts.json')
+        .get<{ [key: string]: Post }>(
+            'https://ng-complete-guide-7fa1f-default-rtdb.firebaseio.com/posts.json',
+            {
+                headers: new HttpHeaders({ 'Custom-Header': 'Hello' })
+            }
+        )
         .pipe(
             map(responseData => {
             let postArray: Post[] = [];
