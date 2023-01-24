@@ -1,5 +1,5 @@
-import { catchError } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { catchError, tap } from 'rxjs/operators';
+import { HttpClient, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, throwError } from 'rxjs';
 import { map } from 'rxjs-compat/operators/map';
@@ -16,9 +16,12 @@ export class ReviewPostsService {
         this.http
         .post<{ name: string}>(
             'https://ng-complete-guide-7fa1f-default-rtdb.firebaseio.com/posts.json',
-            post
-        ).subscribe(post => {
-            console.log(post);
+            post,
+            {
+                observe: 'response'
+            }
+        ).subscribe(responseData => {
+            console.log(responseData.body);
         }, error => {
             this.error.next(error.message);
         });
@@ -53,7 +56,19 @@ export class ReviewPostsService {
     }
 
     deletePosts() {
-        return this.http.delete('https://ng-complete-guide-7fa1f-default-rtdb.firebaseio.com/posts.json');
+        return this.http.delete(
+            'https://ng-complete-guide-7fa1f-default-rtdb.firebaseio.com/posts.json',
+            {
+                observe: 'events'
+            }
+        ).pipe(
+            tap(event => {
+                console.log(event);
+                if (event.type === HttpEventType.Response) {
+                    console.log(event.body);
+                }
+            })
+        );
     }
 
 }
