@@ -1,3 +1,4 @@
+import { ReviewAuthInterceptorService } from './review-http/review-auth-interceptor.service';
 import { LoggingInterceptorService } from './logging-interceptor.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -25,6 +26,11 @@ import { ReviewHttpComponent } from './review-http/review-http.component';
     ReactiveFormsModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ReviewAuthInterceptorService,
+      multi: true
+    }
     // {
     //   provide: HTTP_INTERCEPTORS, 
     //   useClass: LoggingInterceptorService, 
